@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 from weather_api import get_weather_forecast
-from utils.format_weather import format_forecast
+from weather_bot.utils import format_forecast
 
 async def weather_forecast_handler(update: Update, 
                                    context: ContextTypes.DEFAULT_TYPE

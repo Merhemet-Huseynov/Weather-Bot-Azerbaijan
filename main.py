@@ -1,7 +1,11 @@
 from telegram import Bot
 from telegram.ext import Application, CommandHandler
+from weather_bot.config import BOT_TOKEN
 from weather_bot.handlers import weather_daily_handler, weather_forecast_handler
 from weather_bot.handlers import start_handler
+
+# Application yaradın
+application = Application.builder().token(BOT_TOKEN).build()
 
 # Handler-ları qeydiyyatdan keçirin
 application.add_handler(CommandHandler("start", start_handler))

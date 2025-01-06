@@ -13,9 +13,9 @@ def format_forecast(forecast_data, is_daily=False):
 
         # Sunrise və Sunset varsa, onları datetime formatına çeviririk
         if sunrise != "N/A":
-            sunrise = datetime.utcfromtimestamp(sunrise).strftime('%H:%M:%S')
+            sunrise = datetime.utcfromtimestamp(sunrise).strftime("%H:%M:%S")
         if sunset != "N/A":
-            sunset = datetime.utcfromtimestamp(sunset).strftime('%H:%M:%S')
+            sunset = datetime.utcfromtimestamp(sunset).strftime("%H:%M:%S")
 
         forecast_message += (f"📅 Tarix: {date}\n"
                              f"🌡️ Min. Temp: {temp_min}°C\n"
