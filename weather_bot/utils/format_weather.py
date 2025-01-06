@@ -18,11 +18,11 @@ def format_forecast(forecast_data, is_daily=False):
             sunset = datetime.utcfromtimestamp(sunset).strftime("%H:%M:%S")
 
         forecast_message += (f"📅 Tarix: {date}\n"
-                             f"🌡️ Min. Temp: {temp_min}°C\n"
-                             f"🌡️ Max. Temp: {temp_max}°C\n"
-                             f"🌫️ Hava: {description}\n"
+                             f"❄️ Min. Temp: {temp_min}°C\n"
+                             f"🌞 Max. Temp: {temp_max}°C\n"
+                             f"🌥️ Hava: {description}\n"
                              f"🌅 Gün Doğuşu: {sunrise}\n"
-                             f"🌇 Gün Batışı: {sunset}\n\n")
+                             f"🌙 Gün Batışı: {sunset}\n\n")
 
         if is_daily:
             break  # yalnız ilk günü göstərmək üçün
