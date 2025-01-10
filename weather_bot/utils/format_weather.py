@@ -1,7 +1,5 @@
-from datetime import datetime
-
-def format_forecast(forecast_data, is_daily=False):
-    forecast_message = ""
+def format_forecast(forecast_data, city_name, is_daily=False):
+    forecast_message = f"🌍 Şəhər: {city_name}\n\n"
 
     for day in forecast_data:
         date = day["date"]

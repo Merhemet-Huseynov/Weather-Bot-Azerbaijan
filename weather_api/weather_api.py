@@ -27,18 +27,18 @@ def parse_forecast_data(data):
         })
     return forecast_data
 
-def handle_error(status_code):
+def handle_error(response):
     if response.status_code == 404:
-        return (f"Şəhər tapılmadı, zəhmət olmasa düzgün"
+        return (f"Şəhər tapılmadı, zəhmət olmasa düzgün "
                 f"ad daxil edin."
                 )
     elif response.status_code == 401:
-        return (f"API açarınız yanlışdır, zəhmət olmasa"
+        return (f"API açarınız yanlışdır, zəhmət olmasa "
                 f" düzgün açar istifadə edin."
                 )
     else:
         return (f"Xəta baş verdi: {response.status_code}. Zəhmət"
-               f" olmasa daha sonra yenidən cəhd edin."
+                f" olmasa daha sonra yenidən cəhd edin."
                )
 
 def get_weather_forecast(city_name):
@@ -46,6 +46,9 @@ def get_weather_forecast(city_name):
     
     if response.status_code == 200:
         data = response.json()
-        return parse_forecast_data(data)
-    else:
-        return handle_error(response.status_code)
+        city_name = data["city"]["name"]
+        forecast_data = parse_forecast_data(data)
+        return city_name, forecast_data 
+         
+    return handle_error(response)
+ 
