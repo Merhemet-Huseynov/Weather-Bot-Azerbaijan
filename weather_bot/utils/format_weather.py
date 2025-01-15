@@ -1,7 +1,7 @@
 def format_forecast(forecast_data, city_name, is_daily=False):
     forecast_message = f"🌍 Şəhər: {city_name}\n\n"
 
-    for day in forecast_data:
+    for index, day in enumerate(forecast_data):
         date = day["date"]
         temp_min = day["temp_min"]
         temp_max = day["temp_max"]
@@ -22,7 +22,8 @@ def format_forecast(forecast_data, city_name, is_daily=False):
                              f"🌅 Gün Doğuşu: {sunrise}\n"
                              f"🌙 Gün Batışı: {sunset}\n\n")
 
-        if is_daily:
-            break  # yalnız ilk günü göstərmək üçün
+        # yalnız ilk günü göstərmək üçün
+        if is_daily and index == 0:
+            return forecast_message 
 
     return forecast_message
