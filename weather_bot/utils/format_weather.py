@@ -1,29 +1,42 @@
+from datetime import datetime
+
+def format_city_header(city_name):
+    return f"🌍 Şəhər: {city_name}\n\n"
+
+def format_date_info(day):
+    """Hər gün üçün məlumatı formatlayır."""
+    date = day["date"]
+    temp_min = day["temp_min"]
+    temp_max = day["temp_max"]
+    description = day["description"]
+    sunrise = day.get("sunrise", "N/A")
+    sunset = day.get("sunset", "N/A")
+
+    # Gün doğuşu və batışını formatlama
+    sunrise = format_time(sunrise)
+    sunset = format_time(sunset)
+
+    return (f"📅 Tarix: {date}\n"
+            f"❄️ Min. Temp: {temp_min}°C\n"
+            f"🌞 Max. Temp: {temp_max}°C\n"
+            f"🌥️ Hava: {description}\n"
+            f"🌅 Gün Doğuşu: {sunrise}\n"
+            f"🌙 Gün Batışı: {sunset}\n\n")
+
+def format_time(timestamp):
+    """UNIX timestamp-i oxunaqlı vaxta çevirir."""
+    if timestamp == "N/A":
+        return "N/A"
+    return datetime.utcfromtimestamp(timestamp).strftime("%H:%M:%S")
+
 def format_forecast(forecast_data, city_name, is_daily=False):
-    forecast_message = f"🌍 Şəhər: {city_name}\n\n"
+    """Tam proqnoz məlumatını formatlayır."""
+    forecast_message = format_city_header(city_name)
 
-    for index, day in enumerate(forecast_data):
-        date = day["date"]
-        temp_min = day["temp_min"]
-        temp_max = day["temp_max"]
-        description = day["description"]
-        sunrise = day.get("sunrise", "N/A")
-        sunset = day.get("sunset", "N/A")
-
-        # Sunrise və Sunset varsa, onları datetime formatına çeviririk
-        if sunrise != "N/A":
-            sunrise = datetime.utcfromtimestamp(sunrise).strftime("%H:%M:%S")
-        if sunset != "N/A":
-            sunset = datetime.utcfromtimestamp(sunset).strftime("%H:%M:%S")
-
-        forecast_message += (f"📅 Tarix: {date}\n"
-                             f"❄️ Min. Temp: {temp_min}°C\n"
-                             f"🌞 Max. Temp: {temp_max}°C\n"
-                             f"🌥️ Hava: {description}\n"
-                             f"🌅 Gün Doğuşu: {sunrise}\n"
-                             f"🌙 Gün Batışı: {sunset}\n\n")
-
-        # yalnız ilk günü göstərmək üçün
-        if is_daily and index == 0:
-            return forecast_message 
+    if is_daily:
+        forecast_message += format_date_info(forecast_data[0])
+    else:
+        for day in forecast_data:
+            forecast_message += format_date_info(day)
 
     return forecast_message
