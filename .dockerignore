@@ -1,0 +1,9 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+weather_bot/config/.env
+Pipfile.lock
+Pipfile
+*.git
+ 
